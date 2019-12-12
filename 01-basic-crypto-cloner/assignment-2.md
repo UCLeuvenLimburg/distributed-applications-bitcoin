@@ -61,6 +61,9 @@ config :assignment,
   * Every`HistoryKeeperWorker` will keep the history of a specific coin pair.
   * The `CoindataRetriever` worker will ask the responsible `HistoryKeeperWorker` what it should still clone.
   * [BONUS] You can update the timeframe of a specific coin.
+  * Your `HistoryKeeperManager` is allowed to crash as long as it does not impact the rest of your application.
+    * This means that only the `HistoryKeeperManager` should restart. "The rest of your application" means any other process.
+    * [NOTE] Of course there can be, due to race conditions, small crashes which are self-healing. These crashes should only occur seldom and in unique circumstances. This race condition or unique circumstance should definitely not be something reproducible.
 * We're going to make our Logger a little bit more fancy:
   * When printing a message, we can give a "level" towards this message. This level indicates whether it is a debug message, information message, warning, etc... Use the levels mentioned [here](https://hexdocs.pm/logger/Logger.html).
 
