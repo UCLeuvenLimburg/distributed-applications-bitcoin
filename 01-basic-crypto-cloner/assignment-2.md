@@ -30,9 +30,21 @@ Requirements:
   * `:until` must be set to `DateTime.utc_now() |> DateTime.to_unix()`
   * `:from` must be set to `(DateTime.utc_now() |> DateTime.to_unix()) - 60 * 60 * 24 * 33`
   * `:rate` must be set to `5`
+  * If your implementation has some extra values (such as `:delta_t` or `:base_url`, i'll take this into account and put these values in the new config.)
+  * I will replace your config with a sample config like so:
+
+```elixir
+config :assignment,
+  from: 1_575_676_800,
+  until: 1_575_849_600,
+  rate: 1
+```
+
 * For the part regarding your process manager and worker processes:
   * Use an appropriate supervisor construction for your process manager and worker processes.
   * Your process manager is allowed to crash as long as it does not impact the rest of your application.
+    * This means that only the process manager should restart. "The rest of your application" means any other process.
+    * [NOTE] Of course there can be, due to race conditions, small crashes which are self-healing. These crashes should only occur seldom and in unique circumstances. This race condition or unique circumstance should definitely not be something reproducible.
   * The process manager name registration stays the same.
   * Use a supervisor that supports dynamic workers out of the box and name-register this as `Assignment.CoindataRetrieverSupervisor`.
   * Worker processes (`Assignment.CoindataRetriever` processes) are started in the process manager.
@@ -49,6 +61,9 @@ Requirements:
   * Every`HistoryKeeperWorker` will keep the history of a specific coin pair.
   * The `CoindataRetriever` worker will ask the responsible `HistoryKeeperWorker` what it should still clone.
   * [BONUS] You can update the timeframe of a specific coin.
+  * Your `HistoryKeeperManager` is allowed to crash as long as it does not impact the rest of your application.
+    * This means that only the `HistoryKeeperManager` should restart. "The rest of your application" means any other process.
+    * [NOTE] Of course there can be, due to race conditions, small crashes which are self-healing. These crashes should only occur seldom and in unique circumstances. This race condition or unique circumstance should definitely not be something reproducible.
 * We're going to make our Logger a little bit more fancy:
   * When printing a message, we can give a "level" towards this message. This level indicates whether it is a debug message, information message, warning, etc... Use the levels mentioned [here](https://hexdocs.pm/logger/Logger.html).
 
