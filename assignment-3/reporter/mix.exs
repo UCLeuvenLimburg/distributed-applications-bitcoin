@@ -1,11 +1,11 @@
-defmodule AssignmentOne.MixProject do
+defmodule Reporter.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :assignment,
+      app: :reporter,
       version: "0.1.0",
-      elixir: "~> 1.9",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -15,7 +15,7 @@ defmodule AssignmentOne.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Assignment.Application, []}
+      mod: {Reporter.Application, []}
     ]
   end
 
