@@ -43,7 +43,7 @@ Requirements:
   * Your workers no longer keep your history. More about this in the next section.
 * Some great students mentioned that when the process crashes, the history shouldn't be lost with it. They were completely right! For this reason, we're refactoring the following:
   * Similar to our worker setup with supervisors, we're going to do the same for our history keepers.
-  * Make a `Assignment.HistoryKeeperManager`. Similar to our process manager (which is kind of an ambigious name now, but let's forget about that), it'll start N `Assignment.HistoryKeeperWorker` workers under a supervisor that supports dynamic workers out of the box and name-register this as `Assignment.HistoryKeeperSupervisor`.
+  * Make a `Assignment.HistoryKeeperManager`. Similar to our process manager (which is kind of an ambigious name now, but let's forget about that), it'll start N `Assignment.HistoryKeeperWorker` workers under a supervisor that supports dynamic workers out of the box and name-register this as `Assignment.HistoryKeeperWorkerSupervisor`.
   * This `HistoryKeeperManager` will ask your process manager what coin pairs are supported.
   * Your `HistoryKeeperManager` should by no means hold an invalid state when starting your application. (Hint, `handle_continue`!)
   * Every`HistoryKeeperWorker` will keep the history of a specific coin pair.
