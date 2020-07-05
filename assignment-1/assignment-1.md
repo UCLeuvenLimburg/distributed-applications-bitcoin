@@ -4,7 +4,7 @@
 
 Your code will need to be submitted through GitHub Classroom.
 
-The deadline for committing your code is `Sunday 3 November at 23:59`. Starting from Monday 4 November 00:00, a script will clone your repository with your solution.
+The deadline for committing your code is `Maandag 10 Augustus 8:00AM`. Starting from Monday 4 November 00:00, a script will clone your repository with your solution.
 
 __File creation/last edit time is of no relevance at all for this deadline! Your code should be online at this moment in time.__
 
